@@ -15,36 +15,33 @@
 
 <body>
   <div class="col-12 main container-fluid row justify-content-center p-0 m-0">
-    <header class="header container-fluid row p-2 m-0">
-      <img src="statics/ismog.jpg" class="p-0 m-0 col-md-1 rounded" alt="" srcset="" style="max-height: 90px;">
-      <div class="col-11 container text-center p-3 d-none d-md-block ">
-        <h1 class="p-0 m-0 font-weight-bold">ISM Kerala</h1>
-      </div>
+    <header class="header container-fluid row justify-content-center p-2 m-0" style="object-fit: contain;">
+      <img src="statics/baner.png" class="p-0 m-0 col rounded " alt="" srcset="" style="max-height: 90px; object-fit: contain;">
     </header>
-    <div class="container col-11 row justify-content-center  p-0 m-0 rounded shadow mt-4 ">
+    <div class="container col-11 row justify-content-center  p-0 m-0 rounded shadow mt-4 h-100">
       <header class="container row col-10 justify-content-center text-secondary border-dark my-3">
-        <h1>REGISTRATION</h1>
+        <h2>REGISTRATION</h2>
       </header>
       <div class="col-12 row container justify-content-center  mt-4">
 
-        <form>
+        <form  name="ismform">
           <div class="form-row justify-content-center">
 
             <!-- name -->
             <div class=" mb-4 col-md-4 mr-md-5">
-              <input type="text" class="form-control" id="validationDefault01" placeholder="First name" required>
+              <input type="text" class="form-control" id="name" name="Name" placeholder="Full Name"  required>
             </div>
 
             <!-- age -->
             <div class=" mb-4 col-md-4 ml-md-5">
-              <input type="number" class="form-control" id="validationDefault02" placeholder="Age" required>
+              <input type="number" class="form-control" id="age" name="Age" min="1" max="99" placeholder="Age"  required>
             </div>
 
             <!-- phone -->
             <div class=" mb-4 col-md-4 mr-md-5">
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupPrepend2">
+                  <span class="input-group-text" id="phones">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-telephone-fill" viewBox="0 0 16 16">
                       <path fill-rule="evenodd"
@@ -52,8 +49,8 @@
                     </svg>
                   </span>
                 </div>
-                <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Phone"
-                  aria-describedby="inputGroupPrepend2" required>
+                <input type="text" class="form-control" id="phone" name="Phone" placeholder="Phone"
+                  aria-describedby="phone" oninput="wtsapp()" onblur="validatenum('phone')"  required>
               </div>
             </div>
 
@@ -61,7 +58,7 @@
             <div class=" mb-4 col-md-4 ml-md-5">
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupPrepend2">
+                  <span class="input-group-text" id="whatsapp">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-whatsapp" viewBox="0 0 16 16">
                       <path
@@ -69,37 +66,37 @@
                     </svg>
                   </span>
                 </div>
-                <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Whatsapp"
-                  aria-describedby="inputGroupPrepend2" required>
+                <input type="text" class="form-control" id="whatspp" name="Whatsapp" onblur="validatenum('whatspp')" oninput="isnum('whatspp')" required  placeholder="Whatsapp"
+                  aria-describedby="whatsapp" >
               </div>
             </div>
 
             <!-- geneter -->
             <div class="mb-4 col-md-4 mr-md-5">
-              <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                <option value="1">Male</option>
-                <option value="2">Female</option>
+              <select class="custom-select my-1 mr-sm-2" name="Gender" id="genter" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
             </div>
 
 
             <!-- profession -->
             <div class=" mb-4 col-md-4 ml-md-5">
-              <input type="text" class="form-control" id="validationDefault01"  list="profession" placeholder="Profession" required>
+              <input type="text" class="form-control" id="profession" name="Profession" list="pros" placeholder="Profession"  required>
             </div>
 
 
             <!-- district -->
             <div class="mb-4 col-md-4 mr-md-5">
-              <select class="custom-select " name="district" onchange="fillmandalam()" id="district">
+              <select class="custom-select " name="District" onchange="fillmandalam()" id="district" required>
                 <option value="" disabled selected>Select district</option>
                   <option value="KASARGOD">KASARGOD</option>
                   <option value="KANNUR">KANNUR</option>
                   <option value="WAYANAD">WAYANAD</option>
-                  <option value="KOZHIKODE-NORTH">KOZHIKODE-NORTH</option>
-                  <option value="KOZHIKODE-SOUTH">KOZHIKODE-SOUTH</option>
-                  <option value="MALAPPURAM-EAST">MALAPPURAM-EAST</option>
-                  <option value="MALAPPURAM-WEST">MALAPPURAM-WEST</option>
+                  <option value="KOZHIKODE_NORTH">KOZHIKODE_NORTH</option>
+                  <option value="KOZHIKODE_SOUTH">KOZHIKODE_SOUTH</option>
+                  <option value="MALAPPURAM_EAST">MALAPPURAM_EAST</option>
+                  <option value="MALAPPURAM_WEST">MALAPPURAM_WEST</option>
                   <option value="PALAKKAD">PALAKKAD</option>
                   <option value="THRISSUR">THRISSUR</option>
                   <option value="ERNAKULAM">ERNAKULAM</option>
@@ -114,7 +111,7 @@
 
              <!-- mandalam -->
              <div class="mb-4 col-md-4 ml-md-5">
-              <select class="custom-select " name="mandalam" id="mandalam" onchange="fillunit()"  onclick="topalert('district')">
+              <select class="custom-select " name="Mandalam" id="mandalam" onchange="fillunit()"  onclick="topalert('district')" required>
                 <option value="" disabled selected>Select mandalam</option>
               </select>
             </div>
@@ -122,7 +119,7 @@
 
             <!-- units -->
             <div class="mb-4 col-md-4 mr-md-5">
-              <select class="custom-select " name="unit" id="unit" onclick="topalert('mandalam')">
+              <select class="custom-select " name="Unit" id="unit" onclick="topalert('mandalam')" required>
                 <option value="" disabled selected>Select unit</option>
               </select>
             </div>
@@ -130,10 +127,10 @@
 
             <!-- photo  -->
             <div class="mb-4 col-md-4 ml-md-5">
-              <input class="form-control image-input" type="file" id="imageInput" accept="image/*">
+              <input class="form-control image-input" type="file" id="imageInput" accept="image/*" required>
             </div>
 
-            <div class="col-12 container-fluid row justify-content-center p-0 m-0">
+            <div class="col-12 container-fluid row justify-content-center p-0 m-0 ">
               <div class="col-12 container-fluid row justify-content-center">
                 <canvas id="croppedCanvas"></canvas>
               </div>
@@ -164,7 +161,7 @@
         </div>
         <div class="modal-body text-center">
           <div class="image-container">
-            <img id="imageToCrop" src alt="Crop" class="img-fluid" />
+            <img id="imageToCrop" src alt="Crop" class="img-fluid"/>
           </div>
         </div>
         <div class="modal-footer">
@@ -175,8 +172,9 @@
     </div>
   </div>
 
-  
+
   <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <!-- Include Bootstrap JS and jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -186,7 +184,7 @@
 
   <script src="./statics/main.js"></script>
 
-  <datalist id="profession">
+  <datalist id="pros">
     <option value="Doctor">
     <option value="Engineer">
     <option value="Teacher">
@@ -203,6 +201,7 @@
     <option value="Mechanic">
     <option value="Social worker">
     <option value="Self-Employed">
+    <option value="Other">
   </datalist>
 
 
