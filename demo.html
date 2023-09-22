@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISM kerala</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Include Cropper.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="statics/style.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+</head>
+
+<body>
+  <div class="col-12 main container-fluid row justify-content-center p-0 m-0">
+    <header
+      class="header container-fluid row p-2 border-bottom border-dark m-0  shadow rounded">
+      <img src="statics/ismog.jpg" class="p-0 m-0 col-md-1 rounded" alt="" srcset="" style="max-height: 90px;">
+      <div class="col-11 container text-center p-3 d-none d-md-block ">
+        <h1 class="p-0 m-0 font-weight-bold">ISM Kerala</h1>
+      </div>
+    </header>
+    <div class="container col-11 row justify-content-center  p-0 m-0 rounded shadow mt-4 ">
+      <header class="container row col-10 justify-content-center text-secondary border-dark my-3">
+        <h1>REGISTRATION</h1>
+      </header>
+      <div class="col-12 row container p-0 m-0">
+        <form action class="m-0 p-0 col-12  ">
+          <div class="container-fluid raw col-12 m-0 p-0  justify-content-center text-center ">
+            <input class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-3   mx-lg-4 rounded" type="text" placeholder="Name">
+            <input class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-3   mx-lg-4 rounded" type="text"
+              placeholder="Whatsapp number">
+            <input class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-3   mx-lg-4 rounded" type="text"
+              placeholder="Phone number">
+            <input class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-3   mx-lg-4 rounded" type="number" placeholder="Age"
+              name id min="15" max="99">
+
+            <select class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-3 border border-dark  mx-lg-4 rounded" id="gender"
+              name="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+
+            <input class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-3   mx-lg-4 rounded" type="text" list="profession"
+              placeholder="Profession">
+
+
+            <select class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-3 border border-dark  mx-lg-4 rounded" name="district" onchange="fillmandalam()" id="district" >
+                  <option value="" disabled selected>Select district</option>
+                  <option value="KASARGOD">KASARGOD</option>
+                  <option value="KANNUR">KANNUR</option>
+                  <option value="WAYANAD">WAYANAD</option>
+                  <option value="KOZHIKODE-NORTH">KOZHIKODE-NORTH</option>
+                  <option value="KOZHIKODE-SOUTH">KOZHIKODE-SOUTH</option>
+                  <option value="MALAPPURAM-EAST">MALAPPURAM-EAST</option>
+                  <option value="MALAPPURAM-WEST">MALAPPURAM-WEST</option>
+                  <option value="PALAKKAD">PALAKKAD</option>
+                  <option value="THRISSUR">THRISSUR</option>
+                  <option value="ERNAKULAM">ERNAKULAM</option>
+                  <option value="IDUKKI">IDUKKI</option>
+                  <option value="KOTTAYAM">KOTTAYAM</option>
+                  <option value="ALAPPUZHA">ALAPPUZHA</option>
+                  <option value="PATHANAMTHITTA">PATHANAMTHITTA</option>
+                  <option value="KOLLAM">KOLLAM</option>
+                  <option value="THIRUVANANTHAPURAM">THIRUVANANTHAPURAM</option>
+            </select>
+            
+
+
+            <select class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-2 border border-dark  mx-lg-4 rounded" name="mandalam" id="mandalam" onchange="fillunit()"  onclick="topalert('district')">
+              <option value="" disabled selected>Select mandalam</option>
+            </select>
+
+            <select class="col-11 col-md-6 col-lg-3 p-1 p-lg-2 my-2 border border-dark  mx-lg-4 rounded" name="unit" id="unit" onclick="topalert('mandalam')">
+              <option value="" disabled selected>Select unit</option>
+            </select>
+
+            
+          </div>
+          <div class="col-12 container-fluid row justify-content-center p-0 m-0">
+            <div class="mb-3 col-11 col-md-5 mt-5 row justify-content-center">
+              <input class="image-input btn btn-outline-dark col" type="file" id="imageInput" accept="image/*">
+            </div>
+            <div class="col-12 container-fluid row justify-content-center">
+              <canvas id="croppedCanvas"></canvas>
+            </div>
+          </div>
+          <div class="footer container-fluid row justify-content-center p-0 my-4 ">
+            <button type="button" class="btn btn-dark col-4" >Submit</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Cropping area -->
+    <div id="cropModal" class="modal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Crop Image</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body text-center">
+            <div class="image-container">
+              <img id="imageToCrop" src alt="Crop" class="img-fluid" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="cropButton" class="btn btn-primary">Crop</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include Cropper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+    <script src="./statics/man.js"></script>
+
+    <datalist id="profession">
+      <option value="Doctor">
+      <option value="Engineer">
+      <option value="Teacher">
+      <option value="IT professional">
+      <option value="Advocate">
+      <option value="Business">
+      <option value="Nurse">
+      <option value="Accountant">
+      <option value="Artist">
+      <option value="Chef">
+      <option value="Police officer">
+      <option value="Architect">
+      <option value="Journalist">
+      <option value="Mechanic">
+      <option value="Social worker">
+      <option value="Self-Employed">
+    </datalist>
+
+
+
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+
+
+</body>
+
+</html>

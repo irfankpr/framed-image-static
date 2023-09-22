@@ -1,0 +1,56 @@
+body {
+  background: #ffffff;
+}
+
+.header {
+  background-color: #dadada;
+}
+
+.image-input {
+  display: block;
+  margin: 0;
+  cursor: pointer;
+  
+}
+
+.image-input::before {
+  content: "Upload Photo ";
+  font-weight: 400;
+ 
+  border-right: 1px solid #dadada;
+  padding: 0;
+  margin-right: 12px;
+}
+
+.image-input::-webkit-file-upload-button {
+  display: none;
+}
+
+/* Style the notification text */
+.alertify-notifier .ajs-message {
+  font-weight: bold;
+  color: white;
+}
+/* Style the notification background (optional) */
+.alertify-notifier .ajs-message.ajs-error {
+  background-color: red; /* Customize the background color */
+}
+
+.alertify-notifier.ajs-right .ajs-message.ajs-error {
+  width: max-content; /* Adjust the maximum height as needed */
+  border-radius: 5px;
+}
+
+/* Media query for smaller screens (phones) */
+@media (max-width: 1000px) {
+  /* Reduce the pop-up container size on smaller screens */
+  .alertify-notifier.ajs-right .ajs-message.ajs-error {
+    width: max-content; /* Adjust the maximum height as needed */
+    font-size: 11px;
+    font-weight: bolder;
+    padding: 0.5;
+    margin-left: 20px;
+  }
+}
+
+
