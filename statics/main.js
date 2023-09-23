@@ -37,6 +37,8 @@ $(document).ready(function () {
 
   // Function to handle image cropping and displaying on canvas with a custom size
   $("#cropButton").click(function () {
+    document.getElementById('cropButton').innerHTML="Loading..."
+
     if (cropper) {
       // Get the cropped image data as a data URL
       var croppedImageDataUrl = cropper.getCroppedCanvas().toDataURL();
@@ -124,7 +126,7 @@ $(document).ready(function () {
 mandalams = {
   // 'district': [ list of mandalam in district ]
   KASARGOD: ["KASARAGOD", "MANJESWARAM", "TRIKKARPUR", "KANHANGAD"],
-  KANNUR: ["KANNUR","THALASSERY","VALAPPATTANAM","IRIKKOOR","PAYYANNUR","PAYANGADI","KOOTHPARAMBA","KADAVATHUR","PANOOR","TALIPARAMBA",],
+  KANNUR: ["KANNUR","THALASSERY","VALAPPATTANAM","IRIKKOOR","PAYYANNUR","PAYANGADI","KOOTHUPARAMBA","KADAVATHUR","PANOOR","TALIPARAMBA",],
   WAYANAD:["MEPPADI", "KALPETTA", "MEENANGADI", "MANANTHAVADI", "GUDALLUR"],
   KOZHIKODE_NORTH : ['BALUSSERY', 'PERAMBRA', 'KUTTYADI', 'NADAPURAM', 'VATAKARA', 'PAYYOLI', 'MEPPAYUR', 'KOYILANDI', 'POONOOR'],
   KOZHIKODE_SOUTH : ['ATHOLI', 'CITYWEST', 'KARAPPARAMBU', 'KOZHIKODESOUTH', 'CITYEAST', 'MEDICALCOLLEGE', 'BEYPORE', 'NARIKKUNIWEST', 'KALLAYI', 'NARIKKUNIEAST', 'THAMARASSERY', 'KARAKKUNNATH', 'KODIYATHUR', 'FEROKE', 'PUTHUR'],
@@ -135,8 +137,8 @@ mandalams = {
   ERNAKULAM : ['ERNAKULAM', 'KOCHI', 'KAKKANAD', 'VYTTILA', 'VYPPIN', 'PALLURUTHI', 'ALUVA', 'MUVATTUPUZHA', 'PERUMBAVOOR', 'PARAVOOR', 'KOTHAMANGALAM'],
   ALAPPUZHA : ['ALAPPUZHA', 'KAYAMKULAM', 'NADVATH_NAGAR', 'KUTHIYATHODU'],
   IDUKKI : ['PEERUMEDU', 'THODUPUZHA'],
-  PATHANAMTHITTA : ['PATHANAMTHITTA '],
-  KOTTAYAM : ['ERATTUPETTA ', 'KOTTAYAM '],
+  PATHANAMTHITTA : ['PATHANAMTHITTA',],
+  KOTTAYAM : ['ERATTUPETTA', 'KOTTAYAM'],
   KOLLAM : ['KOLLAM', 'CHADAYAMANGALAM', 'PUNALUR', 'KARUNAGAPPALLY'],
   THIRUVANANTHAPURAM : ['THIRUVANANTHAPURAM', 'NEDUMANGAD', 'ATTINGAL'],
 
@@ -660,12 +662,12 @@ PEERUMEDU : [
 ],
 
 THODUPUZHA : [
-  "Irumbupalam", "Kumbamkallu", "Thodupuzha"
+  "Irumbupalam", "Kumbamkallu","Thodupuzha"
 ],
 
 
 PATHANAMTHITTA : [
-  "Mele Vettippuram", "Thaikkavu", "Kulasekhara Pathi", "Vaypur", "Petta", "Kattoor", "Panthalam", "Poonthala"
+  "Mele Vettippuram", "Thaikkavu", "Kulasekhara Pathi", "Vaypur", "Petta", "Kattoor", "Panthalam","Poonthala"
 ],
 
 KOTTAYAM : [
@@ -673,7 +675,7 @@ KOTTAYAM : [
 ],
 
 ERATTUPETTA : [
-  "Nadakkal", "Salafi Nagar", "Kollamkantam", "Karakkad", "Mattakkad", "Thekkekara", "Vadakkekara", "Town Erattupetta"
+  "Nadakkal", "Salaf_Nagar", "Kollamkantam", "Karakkad", "Mattakkad", "Thekkekara", "Vadakkekara", "Town_Erattupetta"
 ],
 
 KOLLAM : [
@@ -730,7 +732,17 @@ ATTINGAL : [
 
 
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function isage(){
+  var ageInput = document.getElementById("age");
+  var ageValue = parseInt(ageInput.value, 10); // Parse the input value as an integer
 
+  if (!isNaN(ageValue) && ageValue >= 1 && ageValue <= 99) {
+    ageInput.style.background = "";
+  } else {
+    ageInput.style.background = "rgba(255, 0, 0, 0.2)";
+  }
+ 
+}
 
 
 function topalert(txt) {
@@ -787,7 +799,7 @@ function fillunit() {
 
 function wtsapp(){
   var num = $("#phone").val();
-  if (/^[0-9]+$/.test(num)){
+  if ( /^(\+\d*|\d+)$/.test(num)){
     document.getElementById('whatspp').value=num
     document.getElementById("phone").style.background='';
   }else if(num.length == 0){
@@ -802,7 +814,7 @@ function wtsapp(){
 
 
 function validatenum(id){
-  var pattern = /^\d{10}$/; // Anchored pattern for exactly 10 digits
+  var pattern =  /^(\+\d*|\d+)$/; // Anchored pattern for exactly 10 digits
   var num = $("#" + id).val();
   if (pattern.test(num) || num.length === 0) {
     document.getElementById(id).style.background = '';
@@ -814,7 +826,7 @@ function validatenum(id){
 
 function isnum(id){
 var num = $('#'+id).val();
-if (/^[0-9]+$/.test(num)){
+if ( /^(\+\d*|\d+)$/.test(num)){
   document.getElementById(id).style.background='';
 }else{
   document.getElementById(id).style.background='rgba(255, 0, 0, 0.2)';
@@ -830,6 +842,19 @@ const form = document.forms['ismform'];
 
 form.addEventListener('submit', e => {
   e.preventDefault();
+
+
+  const fieldIds = [ 'name','age','phone','whatspp','genter','profession','district','mandalam','unit','imageInput'];
+
+  for (const id of fieldIds) {
+    const value = $('#' + id).val().trim();
+    if (value === '') {
+      Swal.fire('All fields required');
+      return false; 
+    }
+  }
+
+
 
   // Get the canvas element by its id
   const canvas = document.getElementById('croppedCanvas');
@@ -849,16 +874,19 @@ form.addEventListener('submit', e => {
   document.body.removeChild(link);
 
   // After the download, show a success message
-  Swal.fire('Download successful');
-
-  // Reload the page if needed
-  // window.location.reload();
+//  here
 
   // Submit the form to your server as you were doing before
   fetch(scriptURL, { method: 'POST', body: new FormData(form) })
     .then(response => {
       // Handle the response from your server
       // You can show an additional success message here if needed
+      Swal.fire('Thanks for Registering! Downloading Completed.').then((result) => {
+        if (result.isConfirmed) {
+          // Refresh the page
+          window.location.reload();
+        }
+      });
     })
     .catch(error => {
       console.error('Error!', error.message);

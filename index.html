@@ -14,17 +14,17 @@
 </head>
 
 <body>
-  <div class="col-12 main container-fluid row justify-content-center p-0 m-0">
-    <header class="header container-fluid row justify-content-center p-2 m-0" style="object-fit: contain;">
+  <div class="col-12 main container-fluid row justify-content-center p-0 m-0" >
+    <header class="header shadow-sm container-fluid row justify-content-center p-2 m-0" style="object-fit: contain;">
       <img src="statics/baner.png" class="p-0 m-0 col rounded " alt="" srcset="" style="max-height: 90px; object-fit: contain;">
     </header>
-    <div class="container col-11 row justify-content-center  p-0 m-0 rounded shadow mt-4 h-100">
-      <header class="container row col-10 justify-content-center text-secondary border-dark my-3">
-        <h2>REGISTRATION</h2>
+    <div class="container col-11 row justify-content-center  p-0 m-0 mb-lg-5 rounded shadow mt-4" >
+      <header class="container row col-10 justify-content-center text-secondary border-dark my-0">
+        <h3>Form for Registration</h3>
       </header>
       <div class="col-12 row container justify-content-center  mt-4">
 
-        <form  name="ismform">
+        <form  name="ismform" enctype="multipart/form-data">
           <div class="form-row justify-content-center">
 
             <!-- name -->
@@ -34,7 +34,7 @@
 
             <!-- age -->
             <div class=" mb-4 col-md-4 ml-md-5">
-              <input type="number" class="form-control" id="age" name="Age" min="1" max="99" placeholder="Age"  required>
+              <input type="number" class="form-control" id="age" name="Age" min="1" max="99" placeholder="Age" oninput="isage()" required>
             </div>
 
             <!-- phone -->
@@ -49,7 +49,7 @@
                     </svg>
                   </span>
                 </div>
-                <input type="text" class="form-control" id="phone" name="Phone" placeholder="Phone"
+                <input type="text" class="form-control" maxlength="10" minlength="10" id="phone" name="Phone" placeholder="Phone"
                   aria-describedby="phone" oninput="wtsapp()" onblur="validatenum('phone')"  required>
               </div>
             </div>
@@ -66,7 +66,7 @@
                     </svg>
                   </span>
                 </div>
-                <input type="text" class="form-control" id="whatspp" name="Whatsapp" onblur="validatenum('whatspp')" oninput="isnum('whatspp')" required  placeholder="Whatsapp"
+                <input type="text" class="form-control" maxlength="10" minlength="10" id="whatspp" name="Whatsapp" onblur="validatenum('whatspp')" oninput="isnum('whatspp')" required  placeholder="Whatsapp"
                   aria-describedby="whatsapp" >
               </div>
             </div>
@@ -127,7 +127,7 @@
 
             <!-- photo  -->
             <div class="mb-4 col-md-4 ml-md-5">
-              <input class="form-control image-input" type="file" id="imageInput" accept="image/*" required>
+              <input class="form-control image-input" name="Photo" type="file" id="imageInput" accept="image/*" required>
             </div>
 
             <div class="col-12 container-fluid row justify-content-center p-0 m-0 ">
@@ -139,12 +139,12 @@
           </div>
       </div>
 
-      <button class="btn btn-dark my-5" type="submit">Submit form</button>
+      <button class="btn btn-dark my-5" type="submit">Submit Form & Downlod Photo</button>
       </form>
 
     </div>
 
-    <footer class="container-fluid row justify-content-around mt-3 pt-3 bg-dark text-light">
+    <footer class="container-fluid row justify-content-around mt-3 mt-lg-5 p-lg-4 pt-3 bg-dark text-light">
       <div class="col-12 col-md-5 container row justify-content-center"><p class="mt-lg-2"><a href="tel:+917034636268" class="text-light text-decoration-none">Help Desk : +91 70346 36268</a></p></div>
       <div class="col-12 col-md-5 container row justify-content-center"><p class="mt-lg-2">© 2023 All Rights Reserved. ISM</p></div>
     </footer>
