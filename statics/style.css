@@ -79,3 +79,13 @@ body {
 }
 
 
+
+
+
+
+
+/* CSS for rounding the cropped area to make it circular */
+.cropper-view-box,
+.cropper-face {
+  border-radius: 50%;
+}

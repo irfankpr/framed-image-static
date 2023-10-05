@@ -15,6 +15,8 @@ $(document).ready(function () {
   // Function to handle file selection and opening the modal
   $("#imageInput").change(function () {
     // Reset the Cropper.js instance
+    document.getElementById('cropButton').removeAttribute('disabled');//////////////////////////////////////////////////////////////////////////////////////////////////
+    document.getElementById('cropButton').innerHTML = "Crop";//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     resetCropper();
 
     var input = this;
@@ -37,7 +39,9 @@ $(document).ready(function () {
 
   // Function to handle image cropping and displaying on canvas with a custom size
   $("#cropButton").click(function () {
-    document.getElementById('cropButton').innerHTML="Loading..."
+    document.getElementById('cropButton').setAttribute('disabled', 'true');//////////////////////////////////////////////////////////////////////////////////////////////////////
+    document.getElementById('cropButton').innerHTML="Loading...";/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     if (cropper) {
       // Get the cropped image data as a data URL
@@ -78,12 +82,12 @@ $(document).ready(function () {
         var ctx = canvas.getContext("2d");
 
         // Calculate the dimensions for the cropped image (30% of canvas size)
-        var croppedWidth = canvas.width * 0.5;
-        var croppedHeight = canvas.height * 0.5;
+        var croppedWidth = canvas.width * 0.429;
+        var croppedHeight = canvas.height * 0.429;
 
         // Calculate the position to center the cropped image
-        var x = (canvas.width - croppedWidth) / 1.85;
-        var y = (canvas.height - croppedHeight) / 2;
+        var x = (canvas.width - croppedWidth) / 2.01;
+        var y = (canvas.height - croppedHeight)/ 1.799;
 
         // Draw the cropped image at the calculated position and size
         ctx.drawImage(croppedImage, x, y, croppedWidth, croppedHeight);
@@ -129,7 +133,7 @@ mandalams = {
   KANNUR: ["KANNUR","THALASSERY","VALAPPATTANAM","IRIKKOOR","PAYYANNUR","PAYANGADI","KOOTHUPARAMBA","KADAVATHUR","PANOOR","TALIPARAMBA",],
   WAYANAD:["MEPPADI", "KALPETTA", "MEENANGADI", "MANANTHAVADI", "GUDALLUR"],
   KOZHIKODE_NORTH : ['BALUSSERY', 'PERAMBRA', 'KUTTYADI', 'NADAPURAM', 'VATAKARA', 'PAYYOLI', 'MEPPAYUR', 'KOYILANDI', 'POONOOR'],
-  KOZHIKODE_SOUTH : ['ATHOLI', 'CITYWEST', 'KARAPPARAMBU', 'KOZHIKODESOUTH', 'CITYEAST', 'MEDICALCOLLEGE', 'BEYPORE', 'NARIKKUNIWEST', 'KALLAYI', 'NARIKKUNIEAST', 'THAMARASSERY', 'KARAKKUNNATH', 'KODIYATHUR', 'FEROKE', 'PUTHUR'],
+  KOZHIKODE_SOUTH : ['ATHOLI', 'CITYWEST', 'KARAPPARAMBU', 'MANKAVU', 'CITYEAST', 'MEDICALCOLLEGE', 'BEYPORE', 'NARIKKUNIWEST','MUKKOM','KALLAYI', 'NARIKKUNIEAST', 'THAMARASSERY', 'KARAKKUNNATH', 'KODIYATHUR', 'FEROKE', 'PUTHUR'],
   MALAPPURAM_EAST : ['CHERUKAVU', 'VAZHAKKAD', 'CHEEKKODE', 'AREEKKODE', 'URANGATTIRI', 'KEEZHUPARAMPA', 'OTHAYI', 'EDAVANNA', 'MAMPAD', 'PULPATTA', 'KAVANOOR', 'PULIKKAL', 'KONDOTTY', 'MONGAM', 'MALAPPURAM', 'PERINTHALMANNA', 'MANKADA', 'MANJERI', 'THRIKKALANGODU', 'WANDOOR', 'PANDIKKAD', 'NILAMBUR', 'CHUNGATHARA', 'EDAKKARA', 'KALIKAVU', 'MOOTHEDAM', 'AMARAMBALAM'],
   MALAPPURAM_WEST : ['UNIVERSITY', 'TIRUR', 'KOTTAKKAL', 'VALAVANNUR', 'KUMARANALLUR', 'CHANGARAMKULAM', 'PONNANI', 'MARANCHERY', 'KUTTIPPURAM', 'RANDATHANI', 'TANALUR', 'VARANAKKARA', 'TIRURANGADI', 'VENGARA'],
   PALAKKAD : ['PALAKKAD', 'EDATHANATTUKARASOUTH', 'EDATHANATTUKARANORTH', 'MANNARKKAD', 'OTTAPPALAM', 'PATTAMBI', 'ALATHUR'],
@@ -243,11 +247,14 @@ KARAPPARAMBU : [
   "Engeri", "Kakkodi", "Malikkadavu", "KaraparambuEast", "KaraparambuWest"
 ],
 
-KOZHIKODESOUTH : [
+MANKAVU : [
   "Azhchavattom", "WestMankavu", "Mankavu", "Pattelthazham", "Kommeri",
   "Kinassery", "Pokkunnu", "Mathara", "MGNagar", "PantheerankavuTown",
   "Puthurmadom", "Perumanna", "Manakkadavu", "PantheerankavuPoolenkara",
   "SalafiCentre,Olavanna", "OlavannaKambiliparammba"
+],
+
+MUKKOM:["Mukkom","Karamoola","Kakkad","Nellikkaparambu","Mavoor","Poolappoyil","Koolimadu","Pottassery","Koodaranji","Chennamangallur"
 ],
 
 CITYEAST : [
@@ -361,7 +368,7 @@ KAVANOOR : [
 
 PULIKKAL : [
   "Kottappuram", "Pulikkal", "Aroor", "Anthiyurkunnu", "Valiyaparampu",
-  "Alungal", "Olavattur", "Alakkaparampu"
+  "Alungal", "Olavattur", "Alakkaparampu",
 ],
 
 KONDOTTY : [
@@ -464,7 +471,7 @@ TIRUR : [
 KOTTAKKAL : [
   "Kooriyad", "Kottakkal", "Iringallur", "Munambath", "Klari-Moochikkal",
   "Kozhichena", "Edarikkode", "Kuzhippuram", "Cherussola", "Kottoor",
-  "Puthupparambu", "Aatteeri", "Othukkungal"
+  "Puthupparambu", "Aatteeri", "Othukkungal","Changuvetty",
 ],
 
 VALAVANNUR : [
@@ -837,7 +844,7 @@ if ( /^(\+\d*|\d+)$/.test(num)){
 
 
 
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzdsQ-Rhxf0jEsJKnoln3W7r1fl0sRvAZ_Z_NwHyTysSh5ruSTWvEEwL4revSXWXSuK/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycby-YqGsETTMD3cRVS7kKQjuGVhfIba6yFbA9vHS6O2xSmZ1y7AuCgeKpVMXRTh4wTH1/exec';
 const form = document.forms['ismform'];
 
 form.addEventListener('submit', e => {
@@ -893,3 +900,28 @@ form.addEventListener('submit', e => {
       Swal.fire('Submission failed');
     });
 });
+
+
+
+
+
+//  ////////////////////////////////  to download image from page 2////////////////////////////////////////
+function downloadCanvasImage() {
+  const canvas = document.getElementById('croppedCanvas');
+  const canvasDataURL = canvas.toDataURL('image/png');
+  const link = document.createElement('a');
+  link.href = canvasDataURL;
+  link.download = 'downloaded_image.png';
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  
+}
+
+
+// document.getElementById('myForm').addEventListener('submit', function (e) {
+//   e.preventDefault(); // Prevent the default form submission
+//   downloadCanvasImage();
+// });
